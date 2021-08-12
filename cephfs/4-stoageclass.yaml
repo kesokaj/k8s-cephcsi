@@ -3,7 +3,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: ceph-cephfs
-  namespace: storage
+  namespace: kube-storage
 provisioner: cephfs.csi.ceph.com
 parameters:
   # (required) String representing a Ceph cluster to provision storage from.
@@ -13,7 +13,7 @@ parameters:
   # Ensure to create an entry in the configmap named ceph-csi-config, based on
   # csi-config-map-sample.yaml, to accompany the string chosen to
   # represent the Ceph cluster in clusterID below
-  clusterID: afb1a3b4-bcf7-4eb8-bf8c-96fb7da55847
+  clusterID: 4732811a-faee-11eb-af65-2172509cde3b
 
   # (required) CephFS filesystem name into which the volume shall be created
   # eg: fsName: myfs
@@ -32,11 +32,11 @@ parameters:
 
   # The secrets have to contain user and/or Ceph admin credentials.
   csi.storage.k8s.io/provisioner-secret-name: csi-cephfs-secret
-  csi.storage.k8s.io/provisioner-secret-namespace: storage
+  csi.storage.k8s.io/provisioner-secret-namespace: kube-storage
   csi.storage.k8s.io/controller-expand-secret-name: csi-cephfs-secret
-  csi.storage.k8s.io/controller-expand-secret-namespace: storage
+  csi.storage.k8s.io/controller-expand-secret-namespace: kube-storage
   csi.storage.k8s.io/node-stage-secret-name: csi-cephfs-secret
-  csi.storage.k8s.io/node-stage-secret-namespace: storage
+  csi.storage.k8s.io/node-stage-secret-namespace: kube-storage
 
   # (optional) The driver can use either ceph-fuse (fuse) or
   # ceph kernelclient (kernel).
@@ -46,7 +46,6 @@ parameters:
 
   # (optional) Prefix to use for naming subvolumes.
   # If omitted, defaults to "csi-vol-".
-  volumeNamePrefix: "se-jar-k8sdeploy01-"
 
 reclaimPolicy: Delete
 allowVolumeExpansion: true
