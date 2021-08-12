@@ -13,6 +13,15 @@ spec:
       labels:
         app: csi-rbdplugin
     spec:
+      tolerations:
+      - key: "loadbalancer"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+      - key: "database"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
       serviceAccountName: rbd-csi-nodeplugin
       hostNetwork: true
       hostPID: true

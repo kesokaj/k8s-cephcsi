@@ -13,6 +13,15 @@ spec:
       labels:
         app: csi-cephfsplugin
     spec:
+      tolerations:
+      - key: "loadbalancer"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+      - key: "database"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
       serviceAccountName: cephfs-csi-nodeplugin
       priorityClassName: system-node-critical
       hostNetwork: true
